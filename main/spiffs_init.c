@@ -1,5 +1,7 @@
 #include "esp_log.h"
 #include "esp_spiffs.h"
+#include <stdio.h>
+#include <string.h>
 
 static const char *TAG = "SPIFFS";
 
@@ -41,20 +43,31 @@ void init_spiffs(void)
     }
 }
 
-// void list_spiffs_files(void)
-// {
-//     DIR *dir = opendir("/spiffs");
-//     if (dir == NULL)
-//     {
-//         ESP_LOGE("SPIFFS_LIST", "Failed to open SPIFFS directory");
-//         return;
-//     }
+void list_spiffs_files(void)
+{
+    ESP_LOGI(TAG, "Reading file");
+    FILE *f = fopen("/spiffs/data/index.html", "r");
+    if (f == NULL)
+    {
+        ESP_LOGE(TAG, "Failed to open file for reading");
+        return;
+    }
+    // char line[64];
+    // fgets(line, sizeof(line), f);
+    // fclose(f);
+    // // strip newline
+    // char *pos = strchr(line, '\n');
+    // if (pos)
+    // {
+    //     *pos = '\0';
+    // }
+    // ESP_LOGI(TAG, "Read from file: '%s'", line);
 
-//     struct dirent *entry;
-//     while ((entry = readdir(dir)) != NULL)
-//     {
-//         ESP_LOGI("SPIFFS_LIST", "Found file: %s", entry->d_name);
-//     }
+    char buf[64];
+    memset(buf, 0, sizeof(buf));
+    fread(buf, 1, sizeof(buf), f);
+    fclose(f);
 
-//     closedir(dir);
-// }
+    // Display the read contents from the file
+    ESP_LOGI(TAG, "Read from file: %s", buf);
+}

@@ -825,6 +825,9 @@ D:/Talha/Freelancing/ESP-IDF_Framework/Miata/build/esp-idf/web_server/CMakeFiles
 D:/Talha/Freelancing/ESP-IDF_Framework/Miata/build/esp-idf/web_server/CMakeFiles/install/local.dir
 D:/Talha/Freelancing/ESP-IDF_Framework/Miata/build/esp-idf/web_server/CMakeFiles/install/strip.dir
 D:/Talha/Freelancing/ESP-IDF_Framework/Miata/build/esp-idf/main/CMakeFiles/__idf_main.dir
+D:/Talha/Freelancing/ESP-IDF_Framework/Miata/build/esp-idf/main/CMakeFiles/spiffs_storage_bin.dir
+D:/Talha/Freelancing/ESP-IDF_Framework/Miata/build/esp-idf/main/CMakeFiles/storage-flash.dir
+D:/Talha/Freelancing/ESP-IDF_Framework/Miata/build/esp-idf/main/CMakeFiles/encrypted-storage-flash.dir
 D:/Talha/Freelancing/ESP-IDF_Framework/Miata/build/esp-idf/main/CMakeFiles/edit_cache.dir
 D:/Talha/Freelancing/ESP-IDF_Framework/Miata/build/esp-idf/main/CMakeFiles/rebuild_cache.dir
 D:/Talha/Freelancing/ESP-IDF_Framework/Miata/build/esp-idf/main/CMakeFiles/list_install_components.dir

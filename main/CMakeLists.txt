@@ -3,5 +3,4 @@ idf_component_register(SRCS "main.c"
                       INCLUDE_DIRS "."
                       REQUIRES web_server nvs_flash spiffs)
 
-                      # Add SPIFFS image generation
-# spiffs_create_partition_image(spiffs spiffs/data FLASH_IN_PROJECT)
+                      spiffs_create_partition_image(storage ../spiffs FLASH_IN_PROJECT)

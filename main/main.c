@@ -20,7 +20,7 @@ void app_main(void)
 
     // Initialize SPIFFS
     init_spiffs();
-    // list_spiffs_files();
+    list_spiffs_files();
 
     // Initialize Wi-Fi Access Point
     wifi_init_softap();
