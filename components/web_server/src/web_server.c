@@ -1,14 +1,18 @@
 #include "esp_http_server.h"
 #include "esp_log.h"
-#include "web_server.h"
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 static const char *TAG = "WebServer";
 
-// Handler to serve index.html
+// Global variable to store the RPM value
+static int rpm_value = 1000; // Initial RPM value, can be changed by user
+
+// Handler to serve index.html with dynamic RPM value
 static esp_err_t index_get_handler(httpd_req_t *req)
 {
-    const char *filepath = "/spiffs/index.html";
+    const char *filepath = "/spiffs/data/index.html";
     FILE *f = fopen(filepath, "r");
     if (f == NULL)
     {
@@ -20,14 +24,30 @@ static esp_err_t index_get_handler(httpd_req_t *req)
     char line[256];
     while (fgets(line, sizeof(line), f))
     {
-        httpd_resp_sendstr_chunk(req, line);
+        // Check if the line contains the {{rpm}} placeholder
+        char *placeholder_pos = strstr(line, "{{rpm}}");
+        if (placeholder_pos)
+        {
+            // Create a buffer for the replaced line
+            char temp[512];
+            // Replace {{rpm}} with the actual value of rpm_value
+            *placeholder_pos = '\0'; // Temporarily terminate the string before {{rpm}}
+            snprintf(temp, sizeof(temp), "%s%d%s", line, rpm_value, placeholder_pos + strlen("{{rpm}}"));
+            httpd_resp_sendstr_chunk(req, temp); // Send the replaced line
+        }
+        else
+        {
+            // Send the line as it is
+            httpd_resp_sendstr_chunk(req, line);
+        }
     }
+
     fclose(f);
     httpd_resp_sendstr_chunk(req, NULL); // End of response
     return ESP_OK;
 }
 
-// Handler for POST requests to update settings
+// Handler for POST requests to update RPM
 static esp_err_t update_post_handler(httpd_req_t *req)
 {
     char buf[100];
@@ -38,18 +58,31 @@ static esp_err_t update_post_handler(httpd_req_t *req)
         return ESP_FAIL;
     }
 
-    buf[received] = '\0';
+    buf[received] = '\0'; // Null-terminate the received data
     ESP_LOGI(TAG, "Received POST data: %s", buf);
 
-    // Respond to client
-    httpd_resp_send(req, "Settings updated", HTTPD_RESP_USE_STRLEN);
+    // Extract the value of RPM from the received data (assuming it's in the format "rpm=value")
+    char *rpm_param = strstr(buf, "rpm=");
+    if (rpm_param)
+    {
+        // Convert the received string value to an integer
+        int new_rpm_value = atoi(rpm_param + strlen("rpm="));
+
+        // Store the new RPM value in the global variable
+        rpm_value = new_rpm_value;
+
+        ESP_LOGI(TAG, "Updated RPM: %d", rpm_value);
+    }
+
+    // Respond to the client
+    httpd_resp_send(req, "Data is pushed to ESP32", HTTPD_RESP_USE_STRLEN);
     return ESP_OK;
 }
 
 // Handler to serve style.css
 static esp_err_t style_get_handler(httpd_req_t *req)
 {
-    const char *filepath = "/spiffs/style.css";
+    const char *filepath = "/spiffs/data/style.css";
     FILE *f = fopen(filepath, "r");
     if (f == NULL)
     {
@@ -68,7 +101,7 @@ static esp_err_t style_get_handler(httpd_req_t *req)
     return ESP_OK;
 }
 
-// In start_webserver(), add the URI handler for style.css
+// Start the webserver and register URI handlers
 esp_err_t start_webserver(void)
 {
     httpd_handle_t server = NULL;
@@ -92,7 +125,7 @@ esp_err_t start_webserver(void)
             .user_ctx = NULL};
         httpd_register_uri_handler(server, &uri_style);
 
-        // Handle POST requests
+        // Handle POST requests to update the RPM setting
         httpd_uri_t uri_post = {
             .uri = "/update",
             .method = HTTP_POST,

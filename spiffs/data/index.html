@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h1>Welcome to ESP32 Web Server</h1>
+    <h1>ESP32 Settings</h1>
     <form action="/update" method="POST">
-        <label for="setting1">Setting 1:</label>
-        <input type="text" id="setting1" name="setting1" value="default1">
-        <input type="submit" value="Update Settings">
+        <!-- RPM Setting -->
+        <label for="rpm">RPM :</label>
+        <input type="number" id="rpm" name="rpm" value="{{rpm}}" required>
+        <input type="submit" value="Update RPM">
     </form>
 </body>
 </html>

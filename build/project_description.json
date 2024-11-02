@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "Miata",
-    "project_version":    "07660f1-dirty",
+    "project_version":    "c41bce0-dirty",
     "project_path":       "D:/Talha/Freelancing/ESP-IDF_Framework/Miata",
     "idf_path":           "C:/Users/Talha/esp/v5.3.1/esp-idf",
     "build_dir":          "D:/Talha/Freelancing/ESP-IDF_Framework/Miata/build",
