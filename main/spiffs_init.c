@@ -52,16 +52,6 @@ void list_spiffs_files(void)
         ESP_LOGE(TAG, "Failed to open file for reading");
         return;
     }
-    // char line[64];
-    // fgets(line, sizeof(line), f);
-    // fclose(f);
-    // // strip newline
-    // char *pos = strchr(line, '\n');
-    // if (pos)
-    // {
-    //     *pos = '\0';
-    // }
-    // ESP_LOGI(TAG, "Read from file: '%s'", line);
 
     char buf[64];
     memset(buf, 0, sizeof(buf));

@@ -9,10 +9,49 @@
 <body>
     <h1>ESP32 Settings</h1>
     <form action="/update" method="POST">
-        <!-- RPM Setting -->
+        <!-- RPM Setting with Manual Input -->
         <label for="rpm">RPM :</label>
         <input type="number" id="rpm" name="rpm" value="{{rpm}}" required>
         <input type="submit" value="Update RPM">
     </form>
+
+    <!-- RPM Slider -->
+    <label for="rpm-slider">Adjust RPM:</label>
+    <input type="range" id="rpm-slider" min="0" max="5000" value="{{rpm}}" oninput="displayRPM(this.value)">
+    <span id="rpm-value">{{rpm}}</span>
+    
+    <script>
+        // Function to display the RPM value in real-time as the slider is moved
+        function displayRPM(value) {
+            document.getElementById("rpm-value").innerText = value; // Update displayed value
+        }
+
+        // Function to send the RPM value to ESP32 when slider is released
+        function sendRPM(value) {
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/update", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("rpm=" + value);
+        }
+
+        // Track if slider is being adjusted
+        let isAdjusting = false;
+
+        // Add event listeners for slider control
+        const slider = document.getElementById("rpm-slider");
+
+        slider.addEventListener("mousedown", () => { isAdjusting = true; });
+        slider.addEventListener("mouseup", () => { 
+            isAdjusting = false; 
+            sendRPM(slider.value); // Send value when slider is released
+        });
+
+        // For touch devices
+        slider.addEventListener("touchstart", () => { isAdjusting = true; });
+        slider.addEventListener("touchend", () => { 
+            isAdjusting = false; 
+            sendRPM(slider.value); // Send value when slider is released
+        });
+    </script>
 </body>
 </html>

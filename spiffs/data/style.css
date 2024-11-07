@@ -1,41 +1,11 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-}
-
-h1 {
-    color: #333;
-}
-
-form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 10px;
-}
-
-input[type="number"] {
-    padding: 10px;
+/* Slider styling */
+input[type="range"] {
     width: 100%;
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
-input[type="submit"] {
-    padding: 10px 15px;
-    background-color: #5cb85c;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #4cae4c;
+#rpm-value {
+    font-weight: bold;
+    margin-left: 10px;
+    color: #333;
 }
