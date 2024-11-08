@@ -39,6 +39,32 @@ static esp_err_t index_get_handler(httpd_req_t *req)
     return ESP_OK;
 }
 
+static esp_err_t style_get_handler(httpd_req_t *req)
+{
+    const char *filepath = "/spiffs/data/style.css"; // Ensure this is the correct path
+    FILE *f = fopen(filepath, "r");
+    if (f == NULL)
+    {
+        ESP_LOGE(TAG, "Failed to open file : %s", filepath);
+        httpd_resp_send_404(req);
+        return ESP_FAIL;
+    }
+
+    // Set the correct content type for CSS
+    httpd_resp_set_type(req, "text/css");
+
+    // Send the file content as the response
+    char line[512];
+    while (fgets(line, sizeof(line), f))
+    {
+        httpd_resp_sendstr_chunk(req, line);
+    }
+
+    fclose(f);
+    httpd_resp_sendstr_chunk(req, NULL); // End of response
+    return ESP_OK;
+}
+
 static esp_err_t update_button_handler(httpd_req_t *req)
 {
     char buf[100];
@@ -125,12 +151,12 @@ esp_err_t start_webserver(void)
             .user_ctx = NULL};
         httpd_register_uri_handler(server, &uri_index);
 
-        // httpd_uri_t uri_style = {
-        //     .uri = "/style.css",
-        //     .method = HTTP_GET,
-        //     .handler = style_get_handler,
-        //     .user_ctx = NULL};
-        // httpd_register_uri_handler(server, &uri_style);
+        httpd_uri_t uri_style = {
+            .uri = "/style.css",
+            .method = HTTP_GET,
+            .handler = style_get_handler,
+            .user_ctx = NULL};
+        httpd_register_uri_handler(server, &uri_style);
 
         httpd_uri_t uri_update_button = {
             .uri = "/update_button",

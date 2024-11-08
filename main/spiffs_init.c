@@ -46,7 +46,7 @@ void init_spiffs(void)
 void list_spiffs_files(void)
 {
     ESP_LOGI(TAG, "Reading file");
-    FILE *f = fopen("/spiffs/data/index.html", "r");
+    FILE *f = fopen("/spiffs/data/style.css", "r");
     if (f == NULL)
     {
         ESP_LOGE(TAG, "Failed to open file for reading");

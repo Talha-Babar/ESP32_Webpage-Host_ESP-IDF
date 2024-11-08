@@ -14,12 +14,6 @@
 # EXTERNAL cache entries
 ########################
 
-//No help, variable specified on the command line.
-CCACHE_ENABLE:UNINITIALIZED=1
-
-//Path to a program.
-CCACHE_FOUND:FILEPATH=C:/Users/Talha/.espressif/tools/ccache/4.8/ccache-4.8-windows-x86_64/ccache.exe
-
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=C:/Users/Talha/.espressif/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/xtensa-esp32-elf-addr2line.exe
 
@@ -357,9 +351,6 @@ Miata_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
 Miata_SOURCE_DIR:STATIC=D:/Talha/Freelancing/ESP-IDF_Framework/Miata
-
-//No help, variable specified on the command line.
-PYTHON:UNINITIALIZED=C:\Users\Talha\.espressif\python_env\idf5.3_py3.11_env\Scripts\python.exe
 
 //No help, variable specified on the command line.
 PYTHON_DEPS_CHECKED:UNINITIALIZED=1

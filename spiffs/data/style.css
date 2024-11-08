@@ -1,11 +1,131 @@
-/* Slider styling */
-input[type="range"] {
-    width: 100%;
-    margin: 20px 0;
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;  /* Modern font family for better readability */
+    background-color: #f4f7fb;  /* Light background color */
+    color: #333;  /* Dark text color for contrast */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
-#rpm-value {
-    font-weight: bold;
-    margin-left: 10px;
-    color: #333;
+/* Main Title */
+h1 {
+    color: #2a4d78;  /* A soft blue color */
+    font-size: 36px;  /* Larger title for prominence */
+    margin-bottom: 20px;  /* Space below the title */
+    text-align: center;
+}
+
+/* Container for Controls */
+#controls {
+    background-color: #ffffff;  /* White background for the control section */
+    padding: 30px;  /* Padding inside the container */
+    border-radius: 10px;  /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  /* Soft shadow around the container */
+    width: 90%;  /* Make the container responsive */
+    max-width: 600px;  /* Limit the maximum width */
+}
+
+/* Input fields and Buttons */
+input[type="number"], input[type="range"] {
+    width: calc(100% - 20px);  /* Full width minus padding */
+    padding: 10px;  /* Padding inside the input fields */
+    font-size: 16px;  /* Larger font for readability */
+    border: 1px solid #ccc;  /* Light gray border */
+    border-radius: 5px;  /* Rounded corners */
+    margin-bottom: 20px;  /* Space between elements */
+}
+
+/* Slider Specific Styling */
+input[type="range"] {
+    background-color: #e0e0e0;  /* Light gray background for the track */
+    appearance: none;  /* Remove default styling */
+    height: 8px;  /* Make the track thicker */
+    border-radius: 5px;  /* Rounded track */
+    transition: background-color 0.3s;  /* Smooth transition for hover effect */
+}
+
+/* Custom thumb for slider */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #2a4d78;  /* Blue thumb */
+    cursor: pointer;  /* Change the cursor to a pointer when hovering */
+    transition: background-color 0.3s;  /* Smooth transition for hover effect */
+}
+
+input[type="range"]:hover {
+    background-color: #b0c4de;  /* Change track color on hover */
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    background-color: #1e3a5f;  /* Darker blue on hover */
+}
+
+/* Slider Value Display */
+#slider-rpm-display-1, #slider-rpm-display-2, #slider-rpm-display-3, #slider-rpm-display-4, #slider-rpm-display-5 {
+    font-size: 18px;  /* Slightly larger text for RPM value */
+    font-weight: bold;  /* Bold text for emphasis */
+    color: #333;  /* Dark color for text */
+}
+
+/* Button Styling */
+button {
+    background-color: #2a4d78;  /* Matching blue background for buttons */
+    color: white;  /* White text color */
+    padding: 10px 20px;  /* Adequate padding for clickable buttons */
+    border: none;
+    border-radius: 5px;  /* Rounded corners */
+    font-size: 16px;  /* Larger text for readability */
+    cursor: pointer;  /* Pointer cursor on hover */
+    transition: background-color 0.3s ease;  /* Smooth transition for hover effect */
+}
+
+button:hover {
+    background-color: #1e3a5f;  /* Darker blue on hover */
+}
+
+/* Button and Label Containers */
+div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;  /* Space between control sections */
+}
+
+/* Label Styling */
+label {
+    font-size: 18px;  /* Slightly larger label text */
+    color: #555;  /* Soft gray color for labels */
+    margin-bottom: 5px;  /* Space below the label */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 20px;  /* Add padding to the body on smaller screens */
+    }
+
+    h1 {
+        font-size: 28px;  /* Smaller title on mobile */
+    }
+
+    #controls {
+        width: 100%;  /* Full width on small screens */
+        padding: 20px;  /* Reduced padding */
+    }
+
+    input[type="number"], input[type="range"] {
+        font-size: 14px;  /* Smaller font size for inputs on mobile */
+    }
+
+    button {
+        font-size: 14px;  /* Smaller button text */
+    }
 }
